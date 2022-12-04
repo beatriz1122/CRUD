@@ -9,8 +9,8 @@ import javafx.collections.ObservableList;
 
 public class SalaControl {
 
-	private StringProperty nome = new SimpleStringProperty("");
-	private StringProperty tipo = new SimpleStringProperty("");
+	private StringProperty sa = new SimpleStringProperty("");
+	private StringProperty ti = new SimpleStringProperty("");
 	
 	private  SalaDAO daoSala = new SalaDAO();
 	
@@ -21,25 +21,25 @@ public class SalaControl {
 	public Sala getEntity() {
 		
 		Sala s = new Sala ();
-		s.setNome(nome.get());
-		s.setTipo(tipo.get());
+		s.setSa(sa.get());
+		s.setTi(ti.get());
 		return s;
 	}
 	
 	public void setEntity(Sala s) {
-		nome.set(s.getNome());
-		tipo.set(s.getTipo());
+		sa.set(s.getSa());
+		ti.set(s.getTi());
 	}
 	
 	public void limpar() {
 		
-		nome.set("");
-		tipo.set("");
+		sa.set("");
+		ti.set("");
 	}
 	
 	public void editar () {
 		this.editando = true;
-		this.nomeAntigo = nome.get();
+		this.nomeAntigo = sa.get();
 	}
 	
 	public void adicionar () {
@@ -54,7 +54,7 @@ public class SalaControl {
 	
 	public void pesquisar() {
 		
-	List<Sala> tempLista = daoSala.pesquisarPorNome(nome.get());
+	List<Sala> tempLista = daoSala.pesquisarPorNome(sa.get());
 	lista.clear();
 	lista.addAll(tempLista);
 	}
@@ -65,15 +65,15 @@ public class SalaControl {
 		
 	}
 	
-	public StringProperty nomeProperty() {
+	public StringProperty saProperty() {
 		
-		return nome;
+		return sa;
 		
 	}
 	
-	public StringProperty autorProperty() {
+	public StringProperty tiProperty() {
 		
-		return tipo;
+		return ti;
 		
 	}
 

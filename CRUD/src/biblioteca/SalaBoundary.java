@@ -19,8 +19,8 @@ import javafx.util.Callback;
 public class SalaBoundary extends Application {
 
 	/* Caixa de texto*/
-private TextField txtNome = new TextField("");
-private TextField txtTipo = new TextField("");
+private TextField txtSa = new TextField("");
+private TextField txtTi = new TextField("");
 
 
 private SalaControl control = new SalaControl();
@@ -47,9 +47,9 @@ prepararTable();
 
 /* Enquadrando caixas de texto*/
 gp.add(new Label("Nome "), 0, 0);
-gp.add(txtNome, 1, 0);
+gp.add(txtSa, 1, 0);
 gp.add(new Label("Tipo de Sala "), 0, 1);
-gp.add(txtTipo, 1, 1);
+gp.add(txtTi, 1, 1);
 
 
 
@@ -75,11 +75,11 @@ stage.show();
 }
 
 private void prepararTable() {
-TableColumn<Sala, String> col1 = new TableColumn<>("Nome");
-col1.setCellValueFactory(new PropertyValueFactory<Sala, String>("nome"));
+TableColumn<Sala, String> col1 = new TableColumn<>("Sa");
+col1.setCellValueFactory(new PropertyValueFactory<Sala, String>("sa"));
 
-TableColumn<Sala, String> col2 = new TableColumn<>("Tipo");
-col2.setCellValueFactory(new PropertyValueFactory<Sala, String>("tipo"));
+TableColumn<Sala, String> col2 = new TableColumn<>("Ti");
+col2.setCellValueFactory(new PropertyValueFactory<Sala, String>("ti"));
 
 
 TableColumn<Sala, String> col3 = new TableColumn<>("Ações");
@@ -126,7 +126,7 @@ public void updateItem(String item, boolean empty) {
 return cell;
 }		
 };
-col2.setCellFactory(cellFactory);
+col3.setCellFactory(cellFactory);
 
 
 table.getColumns().clear();
@@ -145,8 +145,8 @@ control.setEntity(novo);
 
 public void vincular () {
 
-Bindings.bindBidirectional(control.nomeProperty(), txtNome.textProperty());
-Bindings.bindBidirectional(control.autorProperty(), txtTipo.textProperty());
+Bindings.bindBidirectional(control.saProperty(), txtSa.textProperty());
+Bindings.bindBidirectional(control.tiProperty(), txtTi.textProperty());
 }
 
 public static void main(String[] args) {

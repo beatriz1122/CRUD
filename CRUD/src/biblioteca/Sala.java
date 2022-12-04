@@ -1,24 +1,24 @@
 package biblioteca;
 
 public class Sala {
-	private String nome ="";
-	private String tipo ="";
+	private String sa ="";
+	private String ti ="";
 	
 	
-	public String getNome() {
-		return nome;
+	public String getSa() {
+		return sa;
 	}
 	
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setSa(String sa) {
+		this.sa = sa;
 	}
 	
-	public String getTipo() {
-		return tipo;
+	public String getTi() {
+		return ti;
 	}
 	
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTi(String ti) {
+		this.ti = ti;
 	}
 
 }

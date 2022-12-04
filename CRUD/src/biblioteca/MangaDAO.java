@@ -29,7 +29,7 @@ public class MangaDAO implements DAOManga{
 	
 	@Override
 	public void create (Manga m) {
-		String sql = "INSERT INTO livros (mnome,mautor,meditora)"
+		String sql = "INSERT INTO mangas (mnome,mautor,meditora)"
 		+ "VALUES ('"+ m.getMNome()+"', '"+m.getMAutor()+"','"+m.getMEditora()+"') ";	 	
 	 	
 			try {	

@@ -18,20 +18,19 @@ import javafx.util.Callback;
 
 public class MangaBoundary extends Application {
 	
-	
+
 	/* Caixa de texto*/
-private TextField txtMNome = new TextField("");
-private TextField txtMAutor = new TextField("");
-private TextField txtMEditora = new TextField("");
+private TextField txtNome = new TextField("");
+private TextField txtAutor = new TextField("");
+private TextField txtEditora = new TextField("");
 
 private MangaControl control = new MangaControl();
 
 private TableView<Manga> table = new TableView<>();
 
-			/*Botões*/
+		/*Botões*/
 private Button btnAdicionar = new Button ("Adicionar");
-
-private Button btnExcluir = new Button ("Excluir");
+//private Button btnExcluir = new Button ("Excluir");
 private Button btnPesquisar = new Button ("Pesquisar");
 
 @Override
@@ -46,16 +45,16 @@ bp.setCenter(table);
 
 prepararTable();
 
-	/* Enquadrando caixas de texto*/
+/* Enquadrando caixas de texto*/
 gp.add(new Label("Nome "), 0, 0);
-gp.add(txtMNome, 1, 0);
+gp.add(txtNome, 1, 0);
 gp.add(new Label("Autor(a) "), 0, 1);
-gp.add(txtMAutor, 1, 1);
+gp.add(txtAutor, 1, 1);
 gp.add(new Label("Editora "), 0, 2);
-gp.add(txtMEditora, 1, 2);
+gp.add(txtEditora, 1, 2);
 
 
-	/* Enquadrando botões*/
+/* Enquadrando botões*/
 gp.add(btnAdicionar, 3, 0);
 
 gp.add(btnPesquisar, 3, 2);
@@ -78,59 +77,59 @@ stage.show();
 
 private void prepararTable() {
 TableColumn<Manga, String> col1 = new TableColumn<>("Nome");
-col1.setCellValueFactory(new PropertyValueFactory<Manga, String>("nome"));
+col1.setCellValueFactory(new PropertyValueFactory<Manga, String>("mnome"));
 
 TableColumn<Manga, String> col2 = new TableColumn<>("Autor");
-col2.setCellValueFactory(new PropertyValueFactory<Manga, String>("autor"));
+col2.setCellValueFactory(new PropertyValueFactory<Manga, String>("mautor"));
 
 TableColumn<Manga, String> col3 = new TableColumn<>("Editora");
-col3.setCellValueFactory(new PropertyValueFactory<Manga, String>("editora"));
+col3.setCellValueFactory(new PropertyValueFactory<Manga, String>("meditora"));
 
 TableColumn<Manga, String> col4 = new TableColumn<>("Ações");
-//col4.setCellValueFactory(new PropertyValueFactory<Manga, String>("DUMMY"));
+//col4.setCellValueFactory(new PropertyValueFactory<Livro, String>("DUMMY"));
 
 Callback<TableColumn<Manga, String>, TableCell<Manga, String>> cellFactory
 = // 
 new Callback<TableColumn<Manga, String>, TableCell<Manga, String>>(){
-	
-	@Override 
-	public TableCell call(final TableColumn<Manga, String> param) {
-	final TableCell<Manga, String> cell =new TableCell<Manga, String>(){
-			
-			final Button btnEditar =new Button("Editar");
-			final Button btn =new Button("Apagar");
-			
-			
-	@Override
-	public void updateItem(String item, boolean empty) {
-		super.updateItem(item, empty);
-			if (empty) {
-				setGraphic(null);
+
+@Override 
+public TableCell call(final TableColumn<Manga, String> param) {
+final TableCell<Manga, String> cell =new TableCell<Manga, String>(){
+		
+		final Button btnEditar =new Button("Editar");
+		final Button btn =new Button("Apagar");
+		
+		
+@Override
+public void updateItem(String item, boolean empty) {
+	super.updateItem(item, empty);
+		if (empty) {
+			setGraphic(null);
+			setText(null);
+			} else {
+				btn.setOnAction(event -> {
+					Manga m = getTableView().getItems().get(getIndex());
+					control.delete(m);
+					control.limpar();
+					control.pesquisar();
+				});
+				btnEditar.setOnAction(event -> {
+					Manga m = getTableView().getItems().get(getIndex());
+					control.setEntity(m);
+					control.editar();
+				});
+				FlowPane fpanel = new FlowPane();
+				fpanel.getChildren().addAll(btnEditar, btn);
+				setGraphic(fpanel);
 				setText(null);
-				} else {
-					btn.setOnAction(event -> {
-						Manga m = getTableView().getItems().get(getIndex());
-						control.delete(m);
-						control.limpar();
-						control.pesquisar();
-					});
-					btnEditar.setOnAction(event -> {
-						Manga m = getTableView().getItems().get(getIndex());
-						control.setEntity(m);
-						control.editar();
-					});
-					FlowPane fpanel = new FlowPane();
-					fpanel.getChildren().addAll(btnEditar, btn);
-					setGraphic(fpanel);
-					setText(null);
-				}
-		}
+			}
+	}
 
 };
-	return cell;
+return cell;
 }		
 };
-	col4.setCellFactory(cellFactory);
+col4.setCellFactory(cellFactory);
 
 
 table.getColumns().clear();
@@ -140,18 +139,18 @@ table.setItems(control.getLista());
 
 table.getSelectionModel().selectedItemProperty()
 .addListener((prop, antiga, novo) -> {
-	
-	control.setEntity(novo);
-	
+
+control.setEntity(novo);
+
 });
 
 }
 
 public void vincular () {
 
-Bindings.bindBidirectional(control.nomeProperty(), txtMNome.textProperty());
-Bindings.bindBidirectional(control.autorProperty(), txtMAutor.textProperty());
-Bindings.bindBidirectional(control.editoraProperty(), txtMEditora.textProperty());
+Bindings.bindBidirectional(control.nomeProperty(), txtNome.textProperty());
+Bindings.bindBidirectional(control.autorProperty(), txtAutor.textProperty());
+Bindings.bindBidirectional(control.editoraProperty(), txtEditora.textProperty());
 }
 
 public static void main(String[] args) {
@@ -161,6 +160,3 @@ Application.launch(MangaBoundary.class, args);
 }
 
 }
-
-
-

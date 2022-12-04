@@ -30,8 +30,8 @@ public class SalaDAO implements DaoSala {
 	
 	@Override
 	public void create (Sala s) {
-		String sql = "INSERT INTO sala (sala,tipo)"
-		+ "VALUES ('"+ s.getNome()+"', '"+s.getTipo()+"') ";	 	
+		String sql = "INSERT INTO salas (sa,ti)"
+		+ "VALUES ('"+ s.getSa()+"', '"+s.getTi()+"') ";	 	
 	 	
 			try {	
 					PreparedStatement pstmt = con.prepareStatement(sql); 
@@ -44,10 +44,10 @@ public class SalaDAO implements DaoSala {
 
 
 	@Override
-	public List<Sala> pesquisarPorNome(String nome) {
+	public List<Sala> pesquisarPorNome(String sa) {
 		List <Sala> lista = new ArrayList<>();
 		
-		String sql = "SELECT * FROM sala WHERE sala LIKE '%"+ nome +"%' ";
+		String sql = "SELECT * FROM salas WHERE sa LIKE '%"+ sa +"%' ";
 		
 		try {
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -55,8 +55,8 @@ public class SalaDAO implements DaoSala {
 		while (rs.next()) {
 			
 			Sala s = new Sala();
-			s.setNome(rs.getString("nome"));
-			s.setTipo(rs.getString("autor"));
+			s.setSa(rs.getString("sa"));
+			s.setTi(rs.getString("ti"));
 			
 			
 			lista.add(s);
@@ -72,8 +72,7 @@ public class SalaDAO implements DaoSala {
 	@Override
 	public void delete(Sala s) {
 		// TODO Auto-generated method stub
-		String sql = "DELETE FROM sala "
-				+ "WHERE sala = '"+ s.getNome()+"'";	 	
+		String sql = "DELETE FROM salas WHERE sa = '" + s.getSa() + "'" ; 	
 			 	
 					try {	
 							PreparedStatement pstmt = con.prepareStatement(sql); 
@@ -86,7 +85,7 @@ public class SalaDAO implements DaoSala {
 
 	@Override
 	public void atualizar(String nomeAntigo, Sala s) {
-		String sql = "UPDATE sala SET sala = '"+ s.getNome()+"', tipo = '"+s.getTipo()+"' WHERE sala = '"+ nomeAntigo +"' ";	 	
+		String sql = "UPDATE salas SET sa = '"+ s.getSa()+"', ti = '"+s.getTi()+"' WHERE salas = '"+ nomeAntigo +"' ";	 	
 			 	
 					try {	
 							PreparedStatement pstmt = con.prepareStatement(sql); 

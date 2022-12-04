@@ -5,7 +5,7 @@ import java.util.List;
 public interface DaoSala {
 	
 	void create(Sala s);
-	List<Sala> pesquisarPorNome(String nome);
+	List<Sala> pesquisarPorNome(String sa);
 	
 	void delete(Sala s);
 	

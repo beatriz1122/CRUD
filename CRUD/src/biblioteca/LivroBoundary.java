@@ -30,8 +30,7 @@ public class LivroBoundary extends Application {
 		
 						/*Botões*/
 		private Button btnAdicionar = new Button ("Adicionar");
-	
-		private Button btnExcluir = new Button ("Excluir");
+		//private Button btnExcluir = new Button ("Excluir");
 		private Button btnPesquisar = new Button ("Pesquisar");
 		
 	@Override
